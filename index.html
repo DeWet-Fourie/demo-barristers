@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barristers Coffee | Premium Coffee Experience</title>
+  <meta name="description" content="Barristers Coffee premium website with menu, story, location and immersive virtual tour." />
+
+  <style>
+    :root{
+      --ink:#0d1b3d;
+      --blue:#10285f;
+      --gold:#c9a44c;
+      --cream:#f8f5ef;
+      --paper:#ffffff;
+      --muted:#6b7280;
+      --line:rgba(13,27,61,.14);
+      --shadow:0 24px 80px rgba(13,27,61,.18);
+      --soft:0 12px 40px rgba(13,27,61,.10);
+      --radius:28px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,system-ui,sans-serif;
+      background:linear-gradient(180deg,#fff,var(--cream));
+      color:var(--ink);
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    .nav{
+      position:fixed;
+      top:14px;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(1120px,calc(100% - 28px));
+      z-index:50;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:.75rem 1rem;
+      border-radius:999px;
+      background:rgba(255,255,255,.82);
+      backdrop-filter:blur(22px);
+      box-shadow:0 10px 40px rgba(13,27,61,.10);
+      border:1px solid rgba(201,164,76,.35);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.7rem;
+      font-weight:900;
+      letter-spacing:.03em;
+      white-space:nowrap;
+    }
+
+    .brand-mark{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--ink),var(--gold));
+      color:white;
+      font-family:Georgia,serif;
+    }
+
+    .links{
+      display:flex;
+      gap:.35rem;
+      align-items:center;
+      font-size:.88rem;
+    }
+
+    .links a{
+      padding:.65rem .9rem;
+      border-radius:999px;
+      color:var(--muted);
+      transition:.25s;
+    }
+
+    .links a:hover{
+      background:rgba(13,27,61,.07);
+      color:var(--ink);
+    }
+
+    .nav-cta{
+      background:var(--ink);
+      color:white!important;
+    }
+
+    .hero{
+      min-height:100svh;
+      display:grid;
+      align-items:end;
+      padding:8rem 1rem 1rem;
+    }
+
+    .hero-card{
+      width:min(1180px,100%);
+      margin:0 auto;
+      min-height:calc(100svh - 9rem);
+      border-radius:42px;
+      overflow:hidden;
+      position:relative;
+      box-shadow:var(--shadow);
+      background:#0d1b3d;
+      isolation:isolate;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg,rgba(13,27,61,.88),rgba(13,27,61,.48),rgba(13,27,61,.12)),
+        url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1800&q=85") center/cover;
+      z-index:-2;
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      inset:-30%;
+      background:radial-gradient(circle at 75% 30%,rgba(255,224,150,.55),transparent 22rem);
+      mix-blend-mode:screen;
+      animation:flare 10s ease-in-out infinite alternate;
+      z-index:-1;
+    }
+
+    @keyframes flare{
+      from{transform:translate(-3%,2%)}
+      to{transform:translate(4%,-3%)}
+    }
+
+    .hero-content{
+      min-height:calc(100svh - 9rem);
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:2rem;
+      align-items:end;
+      padding:clamp(1.4rem,4vw,4.2rem);
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      color:#ffe7b0;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.12);
+      padding:.55rem .9rem;
+      border-radius:999px;
+      font-size:.78rem;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+      backdrop-filter:blur(10px);
+    }
+
+    h1{
+      font-family:Georgia,serif;
+      font-size:clamp(3.4rem,10vw,8.5rem);
+      line-height:.88;
+      letter-spacing:-.07em;
+      color:white;
+      margin:1.1rem 0;
+      max-width:760px;
+    }
+
+    .hero-copy{
+      max-width:560px;
+      color:rgba(255,255,255,.82);
+      font-size:1.08rem;
+      line-height:1.75;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:.8rem;
+      flex-wrap:wrap;
+      margin-top:1.5rem;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:.9rem 1.15rem;
+      border-radius:999px;
+      font-weight:800;
+      transition:.28s;
+      border:1px solid rgba(255,255,255,.25);
+    }
+
+    .btn:hover{transform:translateY(-3px)}
+
+    .btn-primary{
+      background:var(--gold);
+      color:white;
+      box-shadow:0 12px 35px rgba(201,164,76,.28);
+    }
+
+    .btn-ghost{
+      color:white;
+      background:rgba(255,255,255,.12);
+      backdrop-filter:blur(14px);
+    }
+
+    .hours-card{
+      justify-self:end;
+      width:min(360px,100%);
+      background:rgba(255,255,255,.9);
+      backdrop-filter:blur(22px);
+      padding:1.2rem;
+      border-radius:30px;
+      box-shadow:0 20px 70px rgba(0,0,0,.2);
+    }
+
+    .hours-card h3{
+      font-family:Georgia,serif;
+      font-size:1.5rem;
+      margin-bottom:.5rem;
+    }
+
+    .mini-row{
+      display:flex;
+      justify-content:space-between;
+      padding:.72rem 0;
+      border-bottom:1px solid var(--line);
+      color:var(--muted);
+      font-size:.94rem;
+    }
+
+    .mini-row strong{color:var(--ink)}
+
+    section{
+      padding:clamp(4rem,8vw,7.5rem) 1rem;
+    }
+
+    .wrap{
+      width:min(1120px,100%);
+      margin:0 auto;
+    }
+
+    .section-kicker{
+      color:var(--gold);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:.76rem;
+      margin-bottom:.75rem;
+    }
+
+    .section-title{
+      font-family:Georgia,serif;
+      font-size:clamp(2.2rem,6vw,5rem);
+      line-height:.96;
+      letter-spacing:-.045em;
+      max-width:820px;
+    }
+
+    .section-intro{
+      color:var(--muted);
+      font-size:1.06rem;
+      line-height:1.75;
+      max-width:720px;
+      margin-top:1rem;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1rem;
+      margin-top:2rem;
+    }
+
+    .feature{
+      background:white;
+      border:1px solid rgba(201,164,76,.28);
+      border-radius:var(--radius);
+      padding:1.35rem;
+      box-shadow:var(--soft);
+      min-height:250px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition:.35s;
+    }
+
+    .feature:hover{
+      transform:translateY(-8px);
+    }
+
+    .feature h3{
+      font-family:Georgia,serif;
+      font-size:1.7rem;
+      margin-bottom:.55rem;
+    }
+
+    .feature p{
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .price{
+      font-size:2.3rem;
+      font-weight:900;
+      margin-top:1rem;
+      color:var(--gold);
+    }
+
+    .tour-shell{
+      margin-top:2rem;
+      background:linear-gradient(135deg,var(--ink),var(--blue),var(--gold));
+      border-radius:42px;
+      padding:clamp(.75rem,2vw,1.25rem);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .tour-shell::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        radial-gradient(circle at 20% 20%,rgba(255,255,255,.35),transparent 16rem),
+        radial-gradient(circle at 90% 0%,rgba(255,220,140,.36),transparent 18rem);
+      animation:tourGlow 9s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+
+    @keyframes tourGlow{
+      to{transform:translate(3%,-2%) rotate(8deg)}
+    }
+
+    .tour-top{
+      position:relative;
+      z-index:1;
+      color:white;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      padding:.75rem .9rem 1rem;
+    }
+
+    .tour-top h3{
+      font-family:Georgia,serif;
+      font-size:clamp(1.6rem,4vw,2.6rem);
+    }
+
+    .tour-pill{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.13em;
+      border:1px solid rgba(255,255,255,.3);
+      padding:.55rem .75rem;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      white-space:nowrap;
+    }
+
+    .tour-frame{
+      position:relative;
+      z-index:1;
+      overflow:hidden;
+      border-radius:32px;
+      background:#000;
+      border:1px solid rgba(255,255,255,.25);
+      aspect-ratio:16/9;
+      box-shadow:0 20px 60px rgba(0,0,0,.28);
+    }
+
+    .tour-frame iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+    }
+
+    .tour-caption{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:1rem;
+      align-items:center;
+      color:rgba(255,255,255,.82);
+      padding:1rem .8rem .35rem;
+      line-height:1.6;
+    }
+
+    .tour-caption a{
+      color:white;
+      text-decoration:underline;
+      text-underline-offset:4px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .story-band{
+      display:grid;
+      grid-template-columns:.85fr 1.15fr;
+      gap:1rem;
+      align-items:stretch;
+    }
+
+    .story-image{
+      min-height:520px;
+      border-radius:42px;
+      overflow:hidden;
+      box-shadow:var(--soft);
+      background:url("https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1200&q=85") center/cover;
+    }
+
+    .story-copy{
+      background:white;
+      border:1px solid rgba(201,164,76,.28);
+      border-radius:42px;
+      padding:clamp(1.4rem,4vw,3rem);
+      box-shadow:var(--soft);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .quote{
+      font-family:Georgia,serif;
+      font-size:clamp(2rem,5vw,4.5rem);
+      line-height:1;
+      letter-spacing:-.05em;
+      margin:1rem 0;
+      color:var(--ink);
+    }
+
+    .menu-strip{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1rem;
+      margin-top:2rem;
+    }
+
+    .menu-card{
+      background:var(--ink);
+      color:white;
+      border-radius:34px;
+      padding:1.4rem;
+      min-height:330px;
+      box-shadow:var(--shadow);
+    }
+
+    .menu-card.light{
+      background:white;
+      color:var(--ink);
+      border:1px solid rgba(201,164,76,.28);
+      box-shadow:var(--soft);
+    }
+
+    .menu-card h3{
+      font-family:Georgia,serif;
+      font-size:2.3rem;
+      margin-bottom:1rem;
+    }
+
+    .item{
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      padding:.9rem 0;
+      border-bottom:1px solid rgba(255,255,255,.16);
+    }
+
+    .light .item{
+      border-bottom-color:var(--line);
+    }
+
+    .item span{
+      color:rgba(255,255,255,.68);
+    }
+
+    .light .item span{
+      color:var(--muted);
+    }
+
+    .footer{
+      padding:3rem 1rem 1rem;
+      background:#081126;
+      color:white;
+    }
+
+    .footer-card{
+      width:min(1120px,100%);
+      margin:0 auto;
+      border-radius:36px;
+      border:1px solid rgba(255,255,255,.15);
+      background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+      padding:clamp(1.4rem,4vw,3rem);
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:2rem;
+      align-items:end;
+    }
+
+    .footer h2{
+      font-family:Georgia,serif;
+      font-size:clamp(2.3rem,6vw,5.4rem);
+      line-height:.95;
+      letter-spacing:-.06em;
+      max-width:760px;
+    }
+
+    .footer p{
+      color:rgba(255,255,255,.72);
+      margin-top:1rem;
+      line-height:1.7;
+      max-width:580px;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(24px);
+      transition:opacity .8s ease,transform .8s ease;
+    }
+
+    .reveal.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @media(max-width:820px){
+      .links a:not(.nav-cta){display:none}
+      .nav{top:10px;width:calc(100% - 20px)}
+      .brand span{font-size:.88rem}
+      .hero{padding:6rem .62rem .62rem}
+      .hero-card{border-radius:30px;min-height:auto}
+      .hero-content{
+        grid-template-columns:1fr;
+        min-height:calc(100svh - 7rem);
+        padding:1.1rem;
+      }
+      h1{font-size:clamp(3.2rem,17vw,5.7rem)}
+      .hours-card{justify-self:stretch}
+      .feature-grid,.story-band,.menu-strip{grid-template-columns:1fr}
+      .tour-top{align-items:flex-start;flex-direction:column}
+      .tour-frame{aspect-ratio:9/13}
+      .tour-caption{grid-template-columns:1fr}
+      .footer-card{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a class="brand" href="#top">
+      <span class="brand-mark">B</span>
+      <span>Barristers Coffee</span>
+    </a>
+    <div class="links">
+      <a href="#menu">Menu</a>
+      <a href="#tour">Virtual Tour</a>
+      <a href="#story">Story</a>
+      <a class="nav-cta" href="#visit">Visit Us</a>
+    </div>
+  </nav>
+
+  <main id="top" class="hero">
+    <div class="hero-card">
+      <div class="hero-content">
+        <div>
+          <div class="eyebrow">Coffee • Craft • Character</div>
+          <h1>Where every cup makes its case.</h1>
+          <p class="hero-copy">
+            Barristers Coffee is built around refined coffee, calm interiors and a warm local atmosphere.
+            A place for early mornings, meaningful meetings, quiet work sessions and slow conversations.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#tour">Step Inside</a>
+            <a class="btn btn-ghost" href="#menu">View Menu</a>
+          </div>
+        </div>
+
+        <aside class="hours-card">
+          <h3>Open today</h3>
+          <div class="mini-row"><span>Mon — Fri</span><strong>07:00 — 16:00</strong></div>
+          <div class="mini-row"><span>Saturday</span><strong>08:00 — 14:00</strong></div>
+          <div class="mini-row"><span>Sunday</span><strong>Closed</strong></div>
+          <p style="color:var(--muted);line-height:1.55;margin-top:1rem;">
+            Premium coffee, fresh favourites and a space designed to make people stay a little longer.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <section id="menu">
+    <div class="wrap reveal">
+      <div class="section-kicker">Menu</div>
+      <h2 class="section-title">A focused menu with no wasted space.</h2>
+      <p class="section-intro">
+        Barristers keeps the offer clear: strong coffee, smooth favourites, light meals and reliable quality.
+      </p>
+
+      <div class="feature-grid">
+        <article class="feature">
+          <div>
+            <h3>Classic Cappuccino</h3>
+            <p>Rich espresso, steamed milk and a smooth foam finish.</p>
+          </div>
+          <div class="price">R38</div>
+        </article>
+
+        <article class="feature">
+          <div>
+            <h3>Golden Latte</h3>
+            <p>A creamy latte with a warm, elegant finish.</p>
+          </div>
+          <div class="price">R44</div>
+        </article>
+
+        <article class="feature">
+          <div>
+            <h3>Morning Plate</h3>
+            <p>A simple breakfast option built for relaxed mornings.</p>
+          </div>
+          <div class="price">R75</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="tour">
+    <div class="wrap reveal">
+      <div class="section-kicker">Virtual Tour</div>
+      <h2 class="section-title">Explore Barristers before you arrive.</h2>
+      <p class="section-intro">
+        The virtual tour gives customers a real feeling of the space before they decide to visit.
+        It turns curiosity into confidence.
+      </p>
+
+      <div class="tour-shell">
+        <div class="tour-top">
+          <h3>Take a slow look around.</h3>
+          <span class="tour-pill">360° walkthrough</span>
+        </div>
+
+        <div class="tour-frame">
+          <iframe src="https://tour.panoee.net/69f22499999f4bf32f1865f9" allowfullscreen loading="lazy" title="Barristers Coffee virtual tour"></iframe>
+        </div>
+
+        <div class="tour-caption">
+          <p>
+            Move through the space, view the layout, feel the atmosphere and picture your next visit.
+          </p>
+          <a href="https://tour.panoee.net/69f22499999f4bf32f1865f9" target="_blank" rel="noopener">Open full screen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="story">
+    <div class="wrap story-band reveal">
+      <div class="story-image"></div>
+      <div class="story-copy">
+        <div class="section-kicker">Story</div>
+        <p class="quote">Coffee with confidence, comfort and character.</p>
+        <p class="section-intro">
+          Barristers Coffee is inspired by the idea of conversation, craft and presence.
+          The name carries a sense of class and confidence, while the space stays warm,
+          approachable and easy to enjoy.
+        </p>
+        <p class="section-intro">
+          Whether customers come for a quick takeaway, a quiet table or a relaxed meeting,
+          the goal is simple: make the visit feel worth repeating.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap reveal">
+      <div class="section-kicker">Customer Experience</div>
+      <h2 class="section-title">Built to turn online interest into real visits.</h2>
+
+      <div class="menu-strip">
+        <div class="menu-card">
+          <h3>House favourites</h3>
+          <div class="item"><div><strong>Americano</strong><br><span>Clean, bold, no nonsense</span></div><strong>R32</strong></div>
+          <div class="item"><div><strong>Iced Coffee</strong><br><span>Cold, smooth and refreshing</span></div><strong>R45</strong></div>
+          <div class="item"><div><strong>Fresh Pastry</strong><br><span>Golden, light and simple</span></div><strong>R35</strong></div>
+        </div>
+
+        <div class="menu-card light">
+          <h3>Why it works</h3>
+          <div class="item"><div><strong>Premium first impression</strong><br><span>White, gold and blue create a clean royal feel.</span></div></div>
+          <div class="item"><div><strong>Tour-first layout</strong><br><span>The walkthrough feels intentional, not pasted in.</span></div></div>
+          <div class="item"><div><strong>Mobile-ready</strong><br><span>Designed for customers browsing from Google Maps.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="visit" class="footer">
+    <div class="footer-card">
+      <div>
+        <h2>Visit Barristers Coffee.</h2>
+        <p>
+          Add the real address, Google Maps link, contact number and WhatsApp button here.
+          This section should make the next step obvious.
+        </p>
+      </div>
+      <a class="btn btn-primary" href="#top">Back to top</a>
+    </div>
+    <p style="width:min(1120px,100%);margin:1rem auto 0;color:rgba(255,255,255,.45);font-size:.82rem">
+      Barristers Coffee · Premium coffee shop website concept with embedded virtual tour.
+    </p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+        }
+      });
+    },{threshold:.14});
+
+    reveals.forEach(el=>observer.observe(el));
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+      anchor.addEventListener('click', e=>{
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
